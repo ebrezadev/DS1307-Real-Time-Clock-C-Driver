@@ -1,3 +1,4 @@
+/*ds1307 driver header file - Reza Ebrahimi v1.0*/
 #ifndef RTC_DS1307_H
 #define RTC_DS1307_H
 
@@ -54,7 +55,6 @@ enum ds1307_registers {
 uint8_t DS1307_run(uint8_t run_state);
 uint8_t DS1307_run_state(void);
 uint8_t DS1307_read(uint8_t registers, uint8_t *data_array);
-void DS1307_I2C_init();
 void DS1307_reset(uint8_t input);
 uint8_t DS1307_set(uint8_t registers, uint8_t *data_array);
 uint8_t DS1307_init(uint8_t *data_array, uint8_t run_state, uint8_t reset_state);
@@ -64,6 +64,7 @@ uint8_t DS1307_square_wave(uint8_t input);
 void DS1307_snapshot_save();
 void DS1307_snapshot_clear();
 
+void DS1307_I2C_init();
 void time_i2c_write_single(uint8_t device_address, uint8_t register_address, uint8_t data_byte);
 void time_i2c_write_multi(uint8_t device_address, uint8_t start_register_address, uint8_t *data_array, uint8_t data_length);
 void time_i2c_read_single(uint8_t device_address, uint8_t register_address, uint8_t data_byte);
