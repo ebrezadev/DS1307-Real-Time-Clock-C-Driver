@@ -1,9 +1,11 @@
+/*ds1307 low level api - Reza Ebrahimi v1.0*/
+/*adapted low level api for arduino*/
 #include "rtc_ds1307.h"
 #include <Wire.h>       /*added for arduino*/
 
-#define I2C_SPEED       100000
+#define I2C_SPEED       100000        /*according to datasheet, ds1307 supports 100khz i2c speed*/
 
-/*function to transmit one byte of data to register_address on ds1307*/
+/*function to transmit one byte of data to register_address on ds1307 (device_address: 0X68)*/
 void time_i2c_write_single(uint8_t device_address, uint8_t register_address, uint8_t *data_byte)
 {
   Wire.beginTransmission(device_address);
@@ -31,7 +33,7 @@ void time_i2c_write_multi(uint8_t device_address, uint8_t start_register_address
 /*function to read one byte of data from register_address on ds1307*/
 void time_i2c_read_single(uint8_t device_address, uint8_t register_address, uint8_t *data_byte)
 {
-    Wire.beginTransmission(device_address);
+  Wire.beginTransmission(device_address);
   Wire.write(start_register_address);
   Wire.endTransmission(device_address);
   Wire.requestFrom(uint16_t(device_address), 1, 0);
@@ -45,7 +47,7 @@ void time_i2c_read_single(uint8_t device_address, uint8_t register_address, uint
 void time_i2c_read_multi(uint8_t device_address, uint8_t start_register_address, uint8_t *data_array, uint8_t data_length)
 {
   /*setting the i2c device_address to read data*/
-    Wire.beginTransmission(device_address);
+  Wire.beginTransmission(device_address);
   Wire.write(start_register_address);
   Wire.endTransmission(device_address);
   /*requesting data_length bytes of data from device_address*/
