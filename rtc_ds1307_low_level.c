@@ -1,3 +1,4 @@
+/*ds1307 low level api - Reza Ebrahimi v1.0*/
 #include "rtc_ds1307.h"
 
 /*function to transmit one byte of data to register_address on ds1307*/
