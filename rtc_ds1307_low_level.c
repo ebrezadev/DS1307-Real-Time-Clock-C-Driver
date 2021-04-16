@@ -1,5 +1,4 @@
 #include "rtc_ds1307.h"
-#include <Wire.h>       /*added for arduino*/
 
 /*function to transmit one byte of data to register_address on ds1307*/
 void time_i2c_write_single(uint8_t device_address, uint8_t register_address, uint8_t *data_byte)
