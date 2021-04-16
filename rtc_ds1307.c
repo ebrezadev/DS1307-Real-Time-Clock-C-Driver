@@ -1,12 +1,14 @@
+/*ds1307 high level api - Reza Ebrahimi v1.0*/
+/*this is mcu independent code, no need to change the contents of this file. use low level api to adapt the driver to your mcu of choice*/
 #include "rtc_ds1307.h"
 
 static void BCD_to_HEX(uint8_t *data_array, uint8_t array_length);        /*turns the bcd numbers from ds1307 into hex*/
-static void HEX_to_BCD(uint8_t *data_array, uint8_t array_length);        /*turns the hex numbers into bcd*/
+static void HEX_to_BCD(uint8_t *data_array, uint8_t array_length);        /*turns the hex numbers into bcd, to be written back into ds1307*/
 
 static uint8_t register_current_value;        /*used to read current values of ds1307 registers*/
 static uint8_t register_new_value;        /*used to write values to ds1307 registers*/
-static uint8_t snap0_vacancy;
-static uint8_t register_default_value[] = {       /*used in reset function*/
+static uint8_t snap0_vacancy;       /*if snap0_vacancy == OCCUPIED, then a snapshot has been saved on ds1307 RAM and is ready to be read*/
+static uint8_t register_default_value[] = {       /*used in reset function, contains default zero values*/
   DS1307_REGISTER_SECONDS_DEFAULT,
   DS1307_REGISTER_MINUTES_DEFAULT,
   DS1307_REGISTER_HOURS_DEFAULT,
@@ -58,7 +60,8 @@ void DS1307_init_status_update()
   time_i2c_write_single(DS1307_I2C_ADDRESS, DS1307_REGISTER_INIT_STATUS, &register_new_value);
 }
 
-/*function to start or halt the operation of DS1307, using CH control bit in SECONDS register*/
+/*function to start or halt the operation of DS1307, using CH control bit in SECONDS register
+  also preserves the contents of SECONDS register*/
 uint8_t DS1307_run(uint8_t run_state)
 {
   /*preserving the contents of SECONDS register and changing CH bit*/
@@ -356,6 +359,7 @@ void DS1307_snapshot_clear()
   time_i2c_write_single(DS1307_I2C_ADDRESS, DS1307_REGISTER_SNAP0_VACANCY, &snap0_vacancy);
 }
 
+/*internal function related to this file and not accessible from outside*/
 static void BCD_to_HEX(uint8_t *data_array, uint8_t array_length)
 {
   for (int8_t index = (array_length - 1); index >= 0; index--)
@@ -364,6 +368,7 @@ static void BCD_to_HEX(uint8_t *data_array, uint8_t array_length)
   }
 }
 
+/*internal function related to this file and not accessible from outside*/
 static void HEX_to_BCD(uint8_t *data_array, uint8_t array_length)
 {
   uint8_t temporary_value;
