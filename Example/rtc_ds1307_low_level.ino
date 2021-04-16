@@ -3,8 +3,6 @@
 
 #define I2C_SPEED       100000
 
-static void time_i2c_goto_address(uint8_t device_address, uint8_t start_register_address);
-
 /*function to transmit one byte of data to register_address on ds1307*/
 void time_i2c_write_single(uint8_t device_address, uint8_t register_address, uint8_t *data_byte)
 {
@@ -33,7 +31,9 @@ void time_i2c_write_multi(uint8_t device_address, uint8_t start_register_address
 /*function to read one byte of data from register_address on ds1307*/
 void time_i2c_read_single(uint8_t device_address, uint8_t register_address, uint8_t *data_byte)
 {
-  time_i2c_goto_address(device_address, register_address);
+    Wire.beginTransmission(device_address);
+  Wire.write(start_register_address);
+  Wire.endTransmission(device_address);
   Wire.requestFrom(uint16_t(device_address), 1, 0);
   while (Wire.available())
   {
@@ -45,7 +45,9 @@ void time_i2c_read_single(uint8_t device_address, uint8_t register_address, uint
 void time_i2c_read_multi(uint8_t device_address, uint8_t start_register_address, uint8_t *data_array, uint8_t data_length)
 {
   /*setting the i2c device_address to read data*/
-  time_i2c_goto_address(device_address, start_register_address);
+    Wire.beginTransmission(device_address);
+  Wire.write(start_register_address);
+  Wire.endTransmission(device_address);
   /*requesting data_length bytes of data from device_address*/
   Wire.requestFrom(uint16_t(device_address), uint16_t(data_length), 0);
   /*polling and reading the requested data*/
@@ -54,14 +56,6 @@ void time_i2c_read_multi(uint8_t device_address, uint8_t start_register_address,
     *data_array = Wire.read();
     data_array++;
   }
-}
-
-/*function to set the i2c device_address in order to read data*/
-static void time_i2c_goto_address(uint8_t device_address, uint8_t start_register_address)
-{
-  Wire.beginTransmission(device_address);
-  Wire.write(start_register_address);
-  Wire.endTransmission(device_address);
 }
 
 /*function to initialize I2C peripheral in 100khz*/
