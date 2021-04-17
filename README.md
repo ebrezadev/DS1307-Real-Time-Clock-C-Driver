@@ -29,21 +29,34 @@ Different functions in this library can be categorized into different levels of 
 
 ### LEVEL 1:
 void DS1307_I2C_init
+
 void time_i2c_write_single
+
 void time_i2c_write_multi
+
 void time_i2c_read_single
+
 void time_i2c_read_multi
 
 ### LEVEL 2:
 void DS1307_reset
+
 uint8_t DS1307_set
+
 uint8_t DS1307_run
+
 uint8_t DS1307_run_state
+
 uint8_t DS1307_read
+
 uint8_t DS1307_square_wave
+
 uint8_t DS1307_init_status_report
+
 void DS1307_snapshot_save
+
 void DS1307_snapshot_clear
+
 void DS1307_init_status_update
 
 ### LEVEL 3:
