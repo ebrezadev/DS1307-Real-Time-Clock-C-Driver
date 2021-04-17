@@ -6,8 +6,11 @@ Here is the MCU independent, lightweight and portable C driver for DS1307 Real T
 The DS1307 has three main features:
 
 •	Real time clock with stop/start and AM/PM capability.
+
 •	Square wave generator with 4 programmable frequencies: 1 Hz, 4.096 KHz, 8.192 KHz and 32.768 KHz.
+
 •	56 Bytes general purpose RAM.
+
 All of these features are utilized in this library. You can initialize DS1307 using DS1307_init() (with automatic reset, since DS1307 is battery backed and if MCU is reset or out of power, DS1307 continues to keep time so there’s no need to reset the DS1307 everytime our firmware starts). You can start or stop the square wave generator using DS1307_square_wave(). You can also save a snapshot of time inside DS1307 general purpose RAM, for example in the case of an event happening, using DS1307_snapshot_save().
 
 ## How to use
