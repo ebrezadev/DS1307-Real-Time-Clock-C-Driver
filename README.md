@@ -4,6 +4,7 @@ Here is the MCU independent, lightweight and portable C driver for DS1307 Real T
 
 ## Features
 The DS1307 has three main features:
+
 •	Real time clock with stop/start and AM/PM capability.
 •	Square wave generator with 4 programmable frequencies: 1 Hz, 4.096 KHz, 8.192 KHz and 32.768 KHz.
 •	56 Bytes general purpose RAM.
