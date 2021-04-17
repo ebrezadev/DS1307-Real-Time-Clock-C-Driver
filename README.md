@@ -24,5 +24,29 @@ After initializing, you can use DS1307_reset(ALL) to clear DS1307 to its initial
 Other useable function is DS1307_run_state(CLOCK_RUN *or* CLOCK_HALT) to run or halt the clock (please note, resetting or setting the time will not affect run_state).
 Please note that DS1307 reports time inn BCD format. For the ease of use, the driver automatically handles all the conversions between BCD to HEX and HEX to BCD.
 
+## How it works
+Different functions in this library can be categorized into different levels of abstraction from low level functions dealing with I2C hardware, up to higher level functions reporting back time, handling snapshot and etc.
+
+### LEVEL 1:
+void DS1307_I2C_init
+void time_i2c_write_single
+void time_i2c_write_multi
+void time_i2c_read_single
+void time_i2c_read_multi
+
+### LEVEL 2:
+void DS1307_reset
+uint8_t DS1307_set
+uint8_t DS1307_run
+uint8_t DS1307_run_state
+uint8_t DS1307_read
+uint8_t DS1307_square_wave
+uint8_t DS1307_init_status_report
+void DS1307_snapshot_save
+void DS1307_snapshot_clear
+void DS1307_init_status_update
+
+### LEVEL 3:
+uint8_t DS1307_init
 
 
