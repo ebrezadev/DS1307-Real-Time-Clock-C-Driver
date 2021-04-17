@@ -5,7 +5,7 @@ Here is the MCU independent, lightweight and portable C driver for DS1307 Real T
 ## Features
 The DS1307 has three main features:
 
-•	Real time clock with stop/start and AM/PM capabilities.
+•	Real time BCD clock with stop/start and AM/PM pr 24 hours capabilities.
 
 •	Square wave generator with 4 programmable frequencies: 1 Hz, 4.096 KHz, 8.192 KHz and 32.768 KHz.
 
@@ -23,6 +23,12 @@ You can save a snapshot of time using DS1307_snapshot_save() (in case of the hap
 After initializing, you can use DS1307_reset(ALL) to clear DS1307 to its initial zero values (time settings and RAM contents such as snapshot are lost) or DS1307_reset(SECOND) or any other register to reset them one by one. Then you can set the time registers again, using DS1307_set(TIME, time_set) in which time_set is an array of 7 bytes.
 Other useable function is DS1307_run_state(CLOCK_RUN *or* CLOCK_HALT) to run or halt the clock (please note, resetting or setting the time will not affect run_state).
 Please note that DS1307 reports time inn BCD format. For the ease of use, the driver automatically handles all the conversions between BCD to HEX and HEX to BCD.
+
+Other useable function is DS1307_run(CLOCK_RUN *or* CLOCK_HALT) to run or halt the clock (please note, resetting or setting the time will not affect run state).
+
+Please note that DS1307 reports time inn BCD format. For the ease of use, the driver automatically handles all the conversions between BCD to HEX and HEX to BCD.
+
+The AM/PM or 24 hours capability is set to 24 hours by default and cannot be changed. 
 
 ## How it works
 Different functions in this library can be categorized into different levels of abstraction from low level functions dealing with I2C hardware, up to higher level functions reporting back time, handling snapshot and etc.
