@@ -34,7 +34,7 @@ void time_i2c_write_multi(uint8_t device_address, uint8_t start_register_address
 void time_i2c_read_single(uint8_t device_address, uint8_t register_address, uint8_t *data_byte)
 {
   Wire.beginTransmission(device_address);
-  Wire.write(start_register_address);
+  Wire.write(register_address);
   Wire.endTransmission(device_address);
   Wire.requestFrom(uint16_t(device_address), 1, 0);
   while (Wire.available())
