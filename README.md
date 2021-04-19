@@ -1,7 +1,7 @@
 # DS1307 C DRIVER
 * Version 1.0
 * Reza Ebrahimi
-  ## INTRODUCTION
+## INTRODUCTION
 Here is the MCU independent, lightweight and portable C driver for DS1307 Real Time Clock. "The DS1307 serial real-time clock (RTC) is a low-power, full binary-coded decimal (BCD) clock/calendar plus 56 bytes of NV SRAM". The driver is written using standard C straight from Maxim Integrated datasheet and is not influenced by other libraries. CPU intensive tasks are avoided, and mathematical expressions are written using bitwise operators. In order to port this library to any MCU, you have to tweak the low level API file.
 
 ## FEATURES
